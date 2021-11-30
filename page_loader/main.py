@@ -1,4 +1,5 @@
 #!usr/bin/env python3
+from page_loader.downloader import download
 import argparse
 import sys
 import os
@@ -16,10 +17,10 @@ def main():
                         action='help')
     parser.add_argument('url', type=str, help=argparse.SUPPRESS)
     args = parser.parse_args()
-    # result = download(args.url, args.output)
-    # if not result:
-    #     sys.exit(1)
-    # print(result)
+    result = download(args.url, args.output)
+    if not result:
+        sys.exit(1)
+    print(result)
     sys.exit(0)
 
 

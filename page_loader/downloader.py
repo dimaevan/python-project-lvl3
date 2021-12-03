@@ -48,4 +48,4 @@ def download(link, path=os.getcwd()):
 
 
 if __name__ == "__main__":
-    print(download('https://www.portent.com/tools/title-maker/', 'dima'))
+    print(download('https://www.portent.com/tools/title-maker/'))

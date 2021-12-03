@@ -6,6 +6,7 @@ import os
 
 
 def main():
+    first_path = os.getcwd()
     parser = argparse.ArgumentParser(usage='page-loader [option] <url>',
                                      description='Page-loader from url',
                                      add_help=False)
@@ -21,6 +22,7 @@ def main():
     if not result:
         sys.exit(1)
     print(result)
+    os.chdir(first_path)
     sys.exit(0)
 
 

@@ -1,14 +1,16 @@
 install:
-	@poetry install
+	poetry install
+check:
+	poetry check
 build:
-	@poetry build
+	poetry build
 publish:
-	@poetry publish --dry-run
+	poetry publish --dry-run
 package-install:
 	pip install --user dist/*.whl
 activate:
-	@poetry shell
+	poetry shell
 test:
-	@poetry run pytest
+	poetry run pytest
 lint:
-	@poetry run flake8 page_loader/
+	poetry run flake8 page_loader/

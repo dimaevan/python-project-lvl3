@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["dimaevan <dimaevan@gmail.com>"]
 packages = [
-{ include='page_loader' },
+    { include='page_loader' },
 ]
 
 [tool.poetry.scripts]

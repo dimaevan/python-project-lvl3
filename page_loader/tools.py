@@ -3,6 +3,7 @@ from progress.bar import Bar
 import requests
 import logging
 import re
+import os
 
 
 def rename(word):
@@ -38,13 +39,14 @@ def find_extension(word):
         return False
 
 
-def download_file(links, type_of_file=None):
+def download_file(links, type_of_file=None, path=''):
     count = 0
     bar = Bar(f'Downloading {type_of_file}', max=len(links))
     for link, name in links:
         file = get_from_url(link)
         if file:
-            save_file(file.content, name)
+            file_name_full = os.path.join(path, name)
+            save_file(file.content, file_name_full)
             count += 1
         bar.next()
     bar.finish()
@@ -65,13 +67,13 @@ def get_from_url(link):
         logging.error(f'Сan`t download {link} ')
 
 
-def save_file(obj, name):
+def save_file(obj, file_name):
     if obj:
         try:
-            with open(name, 'wb') as file:
+            with open(file_name, 'wb') as file:
                 file.write(obj)
         except IOError:
-            logging.error(f'Can`t save file {name}')
+            logging.error(f'Can`t save file {file_name}')
 
 
 def beauty_path(path):

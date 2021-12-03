@@ -13,8 +13,6 @@ def download(link, path=os.getcwd()):
     if not os.path.isdir(path):
         logging.error('Directory is not exist')
         return
-    full_path = os.path.abspath(path)
-    os.chdir(full_path)
 
     html = get_from_url(link)
     if not html:
@@ -30,21 +28,21 @@ def download(link, path=os.getcwd()):
     soup = BeautifulSoup(html.text, 'html.parser')
     # Create dir 4 downloads
     try:
-        os.mkdir(name_folder)
+        os.mkdir(os.path.join(path, name_folder))
     except FileExistsError:
         pass
 
-    os.chdir(name_folder)
-    # Load files
-    for _ in ('img', 'script', 'link'):
-        resources = search_for_tag(soup, link, name_folder, _)
-        x = download_file(resources, _)
-        print(f'Download {x} {_}')
+    path_to_downloads = os.path.join(path, name_folder)
 
-    os.chdir(full_path)
-    with open(name_html, 'w') as file:
+    # Load files
+    for type_src in ('img', 'script', 'link'):
+        resources = search_for_tag(soup, link, name_folder, type_src)
+        x = download_file(resources, type_src, path_to_downloads)
+        print(f'Download {x} {type_src}')
+
+    with open(os.path.join(path, name_html), 'w') as file:
         file.write(str(soup.prettify()))
-    return os.path.abspath(name_html)
+    return os.path.join(path, name_html)
 
 
 if __name__ == "__main__":

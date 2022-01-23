@@ -7,7 +7,7 @@ import os
 
 
 def rename(word):
-    """ Удаляет ненужные символы из URL """
+    """ Delete unuseful chars from URL """
     return re.sub(r'\W', '-', word)
 
 
@@ -30,6 +30,7 @@ def check_src(src, url):
 
 
 def find_extension(word):
+    """ find file's extension """
     try:
         ext = re.findall(r'\.\w*$', str(word))
         if ext:

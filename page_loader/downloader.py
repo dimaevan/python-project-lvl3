@@ -14,8 +14,9 @@ def download(link, path=os.getcwd()):
         logging.error('Directory is not exist')
         return
 
-    html = get_from_url(link)
-    if not html:
+    html_source = get_from_url(link)
+
+    if not html_source:
         return
 
     domain = urlparse(link).netloc
@@ -25,8 +26,9 @@ def download(link, path=os.getcwd()):
     name_html = rename(clean_url) + '.html'
     name_folder = rename(clean_url) + '_files/'
 
-    soup = BeautifulSoup(html.text, 'html.parser')
-    # Create dir 4 downloads
+    soup = BeautifulSoup(html_source.text, 'html.parser')
+
+    # Create dir for downloads
     try:
         os.mkdir(os.path.join(path, name_folder))
     except FileExistsError:

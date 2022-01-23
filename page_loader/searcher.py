@@ -14,7 +14,7 @@ def search_for_tag(html, url, folder, tag):
         src = link[attribute]
         if not check_src(src, url):
             continue
-        # Full url 4 download
+        # Full url for download
         full_url = check_src(src, url)
         path_url = str(urlparse(full_url).path)
         name_src = urlparse(full_url).netloc + urlparse(full_url).path

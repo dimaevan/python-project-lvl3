@@ -6,6 +6,7 @@ import os
 
 
 def main():
+    """ Parsing arguments """
     parser = argparse.ArgumentParser(usage='page-loader [option] <url>',
                                      description='Page-loader from url',
                                      add_help=False)
@@ -17,7 +18,9 @@ def main():
                         action='help')
     parser.add_argument('url', type=str, help=argparse.SUPPRESS)
     args = parser.parse_args()
+
     result = download(args.url, args.output)
+
     if not result:
         sys.exit(1)
     print(result)
